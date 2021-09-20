@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block tasks %}active{% endblock  %}
+
+{% block body %}
+<div class="color2">
+<section class='task'>
+{% if tasks|length > 0 %}
+{% for task in tasks  %}
+<div class=" box ">
+        <div class=" ">
+            <h2>Title: {{ task.title }} </h2>
+            <p class='description'>Description: {{ task.description }}</p>
+            <span class="badge bg-primary date">Date: {{ task.date }}</span>
+        </div>
+        <div class="sec ">
+
+            <a href="/tasks/update/{{ task.id }} " type="button" class="btn btn-primary">Edit</a>
+            <a id="delete" href="/delete/{{task.id }}" type="button" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div style='height:50px'></div>
+    </section>
+    </div>
+{% endblock  %}
+

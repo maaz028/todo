@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block home %}active{% endblock %}
+
+{% block body %}
+<div class="color">
+<section class="form">
+    <form action="/addTask" method="POST" > {% csrf_token %}
+
+      <div style="text-align: center;">
+        <h2 class="heading">Provide Task Details</h2>
+      </div>
+ <div class="my-2 container">
+   <span class="id">
+   <input type="text" name="id" id="id" hidden>
+  </span>
+  <label for="exampleFormControlTextarea1" class="form-label">Task Title</label>
+  <input name='title' class="form-control"  required id="title" rows="3">
+</div>
+ <div class="my-2 container">
+  <label for="exampleFormControlTextarea1" class="form-label">Task Description</label>
+  <textarea name='description' required class="form-control"   id="description" rows="3"></textarea>
+</div>
+ <div class="my-2 container">
+  <label for="exampleFormControlTextarea1"  class="form-label">Enter Task Date</label>
+  <input name='date' class="form-control" value="{{update.date}}" id='date' type="date" required rows="3"/>
+</div>
+  <div class="my-4 container">
+    <span id="sbtn">
+    <button id="submit" type="submit" class="btn btn-success">Submit</button>
+  </span>
+  <button  type="reset" id="reset" class="btn btn-danger">Clear Text</button>
+   
+  </div>
+</form>
+</section>
+</div>
+{% endblock  %}
+
+{% block script %}
+<script>
+  console.log('working')
+let title = document.getElementById('title')
+let description = document.getElementById('description')
+let date = document.getElementById('date')
+let demo = '{{update.date}}'
+let id = document.getElementById('id')
+
+console.log(demo)
+if ('{{update}}'.length > 0)
+{
+  document.getElementById('reset').hidden = true
+  document.getElementById('submit').innerText = 'Update'
+ 
+  id.setAttribute('value','{{update.id}}')
+  title.setAttribute('value', '{{update.title}}')
+  description.value = '{{update.description}}'.split('/').slice(0,)
+  date.valueAsDate = new Date('{{update.date|date:"n/d/o"}}');
+  
+
+} 
+
+
+
+
+</script>
+
+{% endblock  %}
